@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="" name="task3.s3" xsi:noNamespaceSchemaLocation="http://ctt.cinimex.ru/testSettings.xsd">
+<ClearQueue> 
+    	<Queue objName="TMP.TASK3.OUT"/> 
+	</ClearQueue> 
+	<ClearQueue>
+		<Queue objName="TMP.TASK3.RESP"/>
+	</ClearQueue>	
+	<GetTemplate path="Templates/task3/ex3_msg1_withheaders.xml" variable="msg"/>
+	
+	<SendMessage variable="msg"> 
+    	<Queue objName="TMP.TASK3.IN"/>     	
+    	<set>
+    		<rfh2>
+				<setStringProperty name="System" value="ABC"/>
+				<setStringProperty name="TypeRequest" value="client"/>
+ 			</rfh2>	
+ 		</set>	
+	</SendMessage>
+	<WaitQueueDepth attempts="10" waitForValue="1" waitStep="1000"> 
+    	<Queue objName="TMP.TASK3.RESP"/> 
+	</WaitQueueDepth> 		
+	<GetMessage>
+		<Queue objName="TMP.TASK3.RESP"/> 
+    	<Message variable="msg_respInv">  
+    		<get>
+    		<rfh2>
+    			<getStringProperty name="ERROR" variable="Error_h"/>
+			</rfh2> 
+        	</get>	 
+		</Message>			
+	</GetMessage>
+	<AssertEquals caseSensitivity="false" logLevel="fatal" value="Invalid or Empty Header" variable="Error_h"/>  
+	<ValidateXmlDocument schemaPath="WSDL/task3/Transaction-Result.xsd" variable="msg_respInv"/>
+
+</Test>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="" name="task2.s1" xsi:noNamespaceSchemaLocation="http://ctt.cinimex.ru/testSettings.xsd">
+
+	<ClearQueue> 
+    	<Queue objName="TMP.TASK2.OUT"/> 
+	</ClearQueue> 
+	<ClearQueue>
+		<Queue objName="TMP.TASK2.RESP"/>
+	</ClearQueue>
+	<GetTemplate path="Templates/task2/ex2_msg1.xml" variable="msg"/>
+	<SendMessage variable="msg"> 
+    	<Queue objName="TMP.TASK2.IN"/> 
+	</SendMessage>
+
+	<WaitQueueDepth attempts="10" waitForValue="2" waitStep="1000"> 
+    	<Queue objName="TMP.TASK2.OUT"/> 
+    	<Queue objName="TMP.TASK2.RESP"/> 
+	</WaitQueueDepth> 
+	<GetMessage> 
+    	<Queue objName="TMP.TASK2.OUT"/> 
+    	<Message variable="msg_out"/> 
+	</GetMessage>
+	<GetMessage>
+		<Queue objName="TMP.TASK2.RESP"/> 
+    	<Message variable="msg_resp"/>  
+	</GetMessage>
+	<GetTemplate path="Templates/task2/ex2_out_response_msg_1.xml" variable="msg_exp"/> 
+	<ValidateXmlDocument schemaPath="WSDL/task2/Transaction-Details.xsd" variable="msg_out"/> 
+	<AssertXmlEqual order="false"> 
+    	<actual variable="msg_out"/> 
+    	<expected variable="msg_exp"/> 
+    	<exclude logLevel="info"> 
+        	<mnemonic mnemonicType="XPATH" name="//*[local-name()='TimeStamp']"/> 
+   		 </exclude>
+    </AssertXmlEqual> 
+	<GetTemplate path="Templates/task2/ex2_status_respvalid_msg_1.xml" variable="msg_statResp"/> 
+	<ValidateXmlDocument schemaPath="WSDL/task2/Transaction-Result.xsd" variable="msg_resp"/>
+	
+	
+	
+	<PutVariable mnemonicType="XPATH" name="P-Name" variable="msg"
+             mnemonic="//*[local-name()='Payer']//*[local-name()='Name']"/>
+    <PutVariable mnemonicType="XPATH" name="P-Account" variable="msg"
+             mnemonic="//*[local-name()='Payer']//*[local-name()='Account']"/>        
+    <PutVariable mnemonicType="XPATH" name="B-Name" variable="msg"
+             mnemonic="//*[local-name()='Beneficiary']//*[local-name()='Name']"/>
+    <PutVariable mnemonicType="XPATH" name="B-Account" variable="msg"
+             mnemonic="//*[local-name()='Beneficiary']//*[local-name()='Account']"/>
+    <PutVariable mnemonicType="XPATH" name="D-DealId" variable="msg"
+             mnemonic="//*[local-name()='DealDetails']//*[local-name()='DealId']"/>          
+    <PutVariable mnemonicType="XPATH" name="D-Amount" variable="msg"
+             mnemonic="//*[local-name()='DealDetails']//*[local-name()='Amount']"/>         
+    <PutVariable mnemonicType="XPATH" name="D-Date" variable="msg"
+             mnemonic="//*[local-name()='DealDetails']//*[local-name()='Date']"/>      
+    <PutVariable mnemonicType="XPATH" name="D-Currecny" variable="msg"
+             mnemonic="//*[local-name()='DealDetails']//*[local-name()='Currecny']"/>        
+            
+             
+    <PutVariable mnemonicType="XPATH" name="Payer-Name" variable="msg_out"
+             mnemonic="//*[local-name()='Payer-Name']"/>          
+	<PutVariable mnemonicType="XPATH" name="Payer-Account" variable="msg_out"
+             mnemonic="//*[local-name()='Payer-Account']"/>
+    <PutVariable mnemonicType="XPATH" name="Beneficiary-Name" variable="msg_out"
+             mnemonic="//*[local-name()='Beneficiary-Name']"/>
+	<PutVariable mnemonicType="XPATH" name="Beneficiary-Account" variable="msg_out"
+             mnemonic="//*[local-name()='Beneficiary-Account']"/>
+    <PutVariable mnemonicType="XPATH" name="Transaction-ID" variable="msg_out"
+             mnemonic="//*[local-name()='Transaction-ID']"/>              
+    <PutVariable mnemonicType="XPATH" name="Deal-Amount" variable="msg_out"
+             mnemonic="//*[local-name()='Deal-Amount']"/>         
+    <PutVariable mnemonicType="XPATH" name="Deal-Date" variable="msg_out"
+             mnemonic="//*[local-name()='Deal-Date']"/>         
+    <PutVariable mnemonicType="XPATH" name="Deal-Currecny" variable="msg_out"
+             mnemonic="//*[local-name()='Deal-Currecny']"/>         
+    
+    
+    <CreateList variable="expected"> 
+	</CreateList>    
+	 <AddValueToList list="expected" variable="P-Name"/> 
+	 <AddValueToList list="expected" variable="P-Account"/>
+	 <AddValueToList list="expected" variable="B-Name"/>
+	 <AddValueToList list="expected" variable="B-Account"/>  
+	 <AddValueToList list="expected" variable="D-DealId"/> 
+	 <AddValueToList list="expected" variable="D-Amount"/>
+	 <AddValueToList list="expected" variable="D-Date"/>
+	 <AddValueToList list="expected" variable="D-Currecny"/>
+    <CreateList variable="actual"> 
+	</CreateList>          
+     <AddValueToList list="actual" variable="Payer-Name"/> 
+	 <AddValueToList list="actual" variable="Payer-Account"/>
+	 <AddValueToList list="actual" variable="Beneficiary-Name"/>
+	 <AddValueToList list="actual" variable="Beneficiary-Account"/>    
+	 <AddValueToList list="actual" variable="Transaction-ID"/>  
+	 <AddValueToList list="actual" variable="Deal-Amount"/>  
+	 <AddValueToList list="actual" variable="Deal-Date"/> 
+	 <AddValueToList list="actual" variable="Deal-Currecny"/> 
+	 
+	 <AssertCollectionEqual actual="actual" expected="expected"/>
+</Test>

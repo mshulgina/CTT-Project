@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="" name="task5.s1" xsi:noNamespaceSchemaLocation="http://ctt.cinimex.ru/testSettings.xsd">
+<ClearQueue> 
+    	<Queue objName="TASK5.OUT"/> 
+		<Queue objName="TASK5.TO.EXTERNAL.SYSTEM"/>
+		<Queue objName="TASK5.STORE"/>
+		<Queue objName="TASK5.FROM.EXTERNAL.SYSTEM"/>
+		<Queue objName="TASK5.ERROR"/>
+	</ClearQueue> 
+	<GetTemplate path="Templates/task5/ex5_msg1.xml" variable="msg"/>
+	<SendMessage variable="msg"> 
+    	<Queue objName="TASK5.IN"/>      			
+	</SendMessage>
+	<WaitQueueDepth attempts="20" waitForValue="1" waitStep="1000"> 
+    	<Queue objName="TASK5.TO.EXTERNAL.SYSTEM"/> 
+	</WaitQueueDepth>
+	<GetMessage> 
+    	<Queue objName="TASK5.TO.EXTERNAL.SYSTEM"/> 
+    	<Message variable="msg_ext1"> 
+    	 <get> 
+        	<mqmds> 
+            	<mqmd header="correlationId" variable="cor1"/> 
+        	</mqmds>
+        </get>
+        </Message>
+	</GetMessage>
+	<Wait time="61000"/> 
+	<WaitQueueDepth attempts="20" waitForValue="1" waitStep="1000"> 
+    	<Queue objName="TASK5.ERROR"/> 
+	</WaitQueueDepth>
+		<GetMessage>
+			<Queue objName="TASK5.ERROR"/> 
+    		<Message variable="msg_ERROR">  
+    			<get>
+    			<rfh2>
+    				<getStringProperty name="ERROR" variable="Error_h"/>
+				</rfh2> 
+        		</get>	 
+			</Message>			
+		</GetMessage>
+	
+	<AssertEquals caseSensitivity="false" logLevel="fatal" value="No answer" variable="Error_h"/>  	
+</Test>

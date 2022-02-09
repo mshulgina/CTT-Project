@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="" name="task7.s1" xsi:noNamespaceSchemaLocation="http://ctt.cinimex.ru/testSettings.xsd">
+	<ClearQueue> 
+    	<Queue objName="TASK7.OUT"/> 
+		<Queue objName="TASK7.ERROR"/>
+	</ClearQueue> 
+	<GetTemplate path="Templates/task7/ex7_msg_invalid_code.xml" variable="msg_zzz"/>
+	<SendMessage variable="msg_zzz"> 
+    	<Queue objName="TASK7.IN"/>      			
+	</SendMessage>
+	<WaitQueueDepth attempts="20" waitForValue="1" waitStep="1000"> 
+    	<Queue objName="TASK7.ERROR"/> 
+	</WaitQueueDepth>
+	<GetMessage>
+			<Queue objName="TASK7.ERROR"/> 
+    		<Message variable="msg_ERROR">  
+    			<get>
+    			<rfh2>
+    				<getStringProperty name="ERROR" variable="Error_h"/>
+				</rfh2> 
+        		</get>	 
+			</Message>			
+		</GetMessage>
+	
+	<AssertEquals caseSensitivity="false" logLevel="fatal" value="Currency code ZZZ is not allowed due to database restrictions" variable="Error_h"/>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</Test>

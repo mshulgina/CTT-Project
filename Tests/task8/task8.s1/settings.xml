@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="" name="task8.s1" xsi:noNamespaceSchemaLocation="http://ctt.cinimex.ru/testSettings.xsd">
+	<ClearQueue> 
+    	<Queue objName="TASK8.OUT"/> 
+		<Queue objName="TASK8.TO.EXTERNAL.SYSTEM"/>
+		<Queue objName="TASK8.STORE"/>
+		<Queue objName="TASK8.ERROR"/>
+	</ClearQueue>
+	<ClearTable> 
+    	<Database objName="task8_db"> 
+        	<Table>task8_db.tlog</Table> 
+    	</Database> 
+	</ClearTable>  
+	<GetTemplate path="Templates/task8/ex8_msg_rub.xml" variable="msg_rub"/>
+	<PutVariable mnemonicType="XPATH" name="Currecny" variable="msg_rub"
+             mnemonic="//*[local-name()='DealDetails']//*[local-name()='Currecny']"/>
+    <PutVariable name="DealType_1" value="abcd"/>
+	<SQLSelect> 
+    	<Database objName="task8_db"/>
+		<sql variable="Count_cur">SELECT COUNT(*)FROM task8_db.tconfig where CurrencyCode = '#Currecny#'</sql>
+	</SQLSelect> 
+	<IF condition="#Count_cur# == 0"> 
+	<SQLUpdate>
+    	<Database objName="task8_db"/> 
+    	<sql>
+       		INSERT INTO task8_db.tconfig (PaymentTypes, CurrencyCode) VALUES ('#DealType_1#', '#Currecny#');        
+        </sql> 
+	</SQLUpdate>  
+	</IF> 	
+	<SendMessage variable="msg_rub"> 
+    	<Queue objName="TASK8.IN"/>      			
+	</SendMessage>
+	<WaitQueueDepth attempts="10" waitForValue="1" waitStep="1000"> 
+    	<Queue objName="TASK8.OUT"/>  
+	</WaitQueueDepth> 
+	<GetMessage> 
+    	<Queue objName="TASK8.OUT"/> 
+    	<Message variable="msg_out"/> 
+	</GetMessage>
+	<ValidateXmlDocument schemaPath="WSDL/task8/Transaction-Details.xsd" variable="msg_out"/>    
+	<PutVariable mnemonicType="XPATH" name="Deal_type" variable="msg_out"
+             mnemonic="//*[local-name()='Deal-Type']"/> 
+    <AssertEquals caseSensitivity="false" logLevel="fatal" value="#Deal_type#" variable="DealType_1"/>
+	<Wait time="60000"/>
+	<SQLSelect> 
+    	<Database objName="task8_db"/>
+		<sql variable="Count_after">SELECT COUNT(*)FROM task8_db.tlog</sql>
+	</SQLSelect> 
+	<AssertEquals caseSensitivity="false" logLevel="fatal" value="1" variable="Count_after"/> 
+</Test>

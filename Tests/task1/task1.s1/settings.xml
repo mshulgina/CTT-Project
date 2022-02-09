@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="" name="task1.s1" xsi:noNamespaceSchemaLocation="http://ctt.cinimex.ru/testSettings.xsd">
+	<GetTemplate path="Templates/ex1_msg1_valid.xml" variable="msgReq" />
+	<RunSOAPHttpRequest operationName="create" timeout="5000" wsdlPath="WSDL/fxOption_1.wsdl">
+		<SoapHttpEndpoint objName="task1" />
+		<request variable="msgReq" />
+		<response variable="msgResp" />
+		<httpHeaders>
+			<httpHeader name="SOAPAction" value="&quot;create&quot;" />
+		</httpHeaders>
+	</RunSOAPHttpRequest>
+
+
+
+	<GetTemplate path="Templates/ex1_resp1_validation_success.xml"
+		variable="messuccses" />
+	<AssertXmlEqual order="false">
+		<actual variable="msgResp" />
+		<expected variable="messuccses" />
+	</AssertXmlEqual>
+
+	<Log>#msgResp#</Log>
+</Test>

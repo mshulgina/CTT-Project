@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.cinimex.ru/rim/fxOptionService" xmlns:common="http://www.cinimex.ru/rim/common" xmlns:dcommon="http://www.cinimex.ru/rim/diffcommon" xmlns:dns="http://www.cinimex.ru/rim/difffxOption" xmlns:ns="http://www.cinimex.ru/rim/fxOption" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.cinimex.ru/rim/fxOptionService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.cinimex.ru/rim/fxOptionService">
+      <xs:import namespace="http://www.cinimex.ru/rim/fxOption" schemaLocation="fxOption.xsd"/>
+      <xs:import namespace="http://www.cinimex.ru/rim/common" schemaLocation="fxOption_1.xsd"/>
+      <xs:import namespace="http://www.cinimex.ru/rim/difffxOption" schemaLocation="fxOption_1_2.xsd"/>
+      <xs:import namespace="http://www.cinimex.ru/rim/diffcommon" schemaLocation="fxOption_1_2_3.xsd"/>
+      <xs:element name="GetFxOptionElem">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="common:WsResponseElem"/>
+            <xs:element minOccurs="0" ref="common:StatusElem"/>
+            <xs:element minOccurs="0" name="fxOptionElem" type="ns:fxOptionType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateFxOptionElem">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="fxOptionElem" type="ns:fxOptionType"/>
+            <xs:element minOccurs="0" ref="common:MIRLinkId"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateFxOptionElem">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="fxOptionElem" type="ns:fxOptionType"/>
+            <xs:element minOccurs="0" ref="common:MIRContractId"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DiffUpdateFxOptionElem">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="fxOptionElem" type="dns:fxOptionType"/>
+            <xs:element minOccurs="0" ref="common:MIRContractId"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="retractOutput">
+    <wsdl:part element="common:WsResponseElem" name="output"/>
+  </wsdl:message>
+  <wsdl:message name="updateInput">
+    <wsdl:part element="tns:UpdateFxOptionElem" name="input"/>
+  </wsdl:message>
+  <wsdl:message name="retractInput">
+    <wsdl:part element="common:RetractById" name="input"/>
+  </wsdl:message>
+  <wsdl:message name="getOutput">
+    <wsdl:part element="tns:GetFxOptionElem" name="output"/>
+  </wsdl:message>
+  <wsdl:message name="getInput">
+    <wsdl:part element="common:GetById" name="input"/>
+  </wsdl:message>
+  <wsdl:message name="createInput">
+    <wsdl:part element="tns:CreateFxOptionElem" name="input"/>
+  </wsdl:message>
+  <wsdl:message name="diffUpdateRequest">
+    <wsdl:part element="tns:DiffUpdateFxOptionElem" name="input"/>
+  </wsdl:message>
+  <wsdl:message name="diffUpdateResponse">
+    <wsdl:part element="common:WsResponseElem" name="output"/>
+  </wsdl:message>
+  <wsdl:message name="createOutput">
+    <wsdl:part element="common:WsResponseElem" name="output"/>
+  </wsdl:message>
+  <wsdl:message name="updateOutput">
+    <wsdl:part element="common:WsResponseElem" name="output"/>
+  </wsdl:message>
+  <wsdl:portType name="fxOptionPortType">
+    <wsdl:operation name="create">
+      <wsdl:input message="tns:createInput"/>
+      <wsdl:output message="tns:createOutput"/>
+    </wsdl:operation>
+    <wsdl:operation name="get">
+      <wsdl:input message="tns:getInput"/>
+      <wsdl:output message="tns:getOutput"/>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <wsdl:input message="tns:updateInput"/>
+      <wsdl:output message="tns:updateOutput"/>
+    </wsdl:operation>
+    <wsdl:operation name="retract">
+      <wsdl:input message="tns:retractInput"/>
+      <wsdl:output message="tns:retractOutput"/>
+    </wsdl:operation>
+    <wsdl:operation name="differentialUpdate">
+      <wsdl:input message="tns:diffUpdateRequest"/>
+      <wsdl:output message="tns:diffUpdateResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="fxOptionBinding" type="tns:fxOptionPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="create">
+      <soap:operation soapAction="create"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get">
+      <soap:operation soapAction="get"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <soap:operation soapAction="update"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retract">
+      <soap:operation soapAction="reatract"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="differentialUpdate">
+      <soap:operation soapAction="differentialUpdate"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="fxOptionService">
+    <wsdl:port binding="tns:fxOptionBinding" name="fxOptionPort">
+      <soap:address location="http://172.19.42.149:9080/NRDWS/services/fxOption"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

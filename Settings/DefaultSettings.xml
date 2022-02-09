@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GlobalSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="DefaultSettings.xml" xsi:noNamespaceSchemaLocation="http://ctt.cinimex.ru/globalSettings.xsd">
+	<Resources>
+		<SoapHttpEndpoint address="http://192.168.15.93:8088" objName="task1"/>
+		<RESTUrl objName="restTask1" url="http://192.168.15.93:8088"/>
+		
+		
+		<QueueManager channel="SYSTEM.DEF.SVRCONN" host="192.168.15.74" name="QMTESTERS1" objName="QMTest" port="4401"> 
+            <ccsid>1208</ccsid> 
+        </QueueManager> 
+		<Queue manager="QMTest" objName="TMP.TASK2.IN" queue="TMP.TASK2.IN"/>
+		<Queue manager="QMTest" objName="TMP.TASK2.OUT" queue="TMP.TASK2.OUT"/>
+		<Queue manager="QMTest" objName="TMP.TASK2.RESP" queue="TMP.TASK2.RESP"/>
+		<Queue manager="QMTest" objName="TMP.TASK3.IN" queue="TMP.TASK3.IN"/>
+		<Queue manager="QMTest" objName="TMP.TASK3.OUT" queue="TMP.TASK3.OUT"/>
+		<Queue manager="QMTest" objName="TMP.TASK3.RESP" queue="TMP.TASK3.RESP"/>
+		
+		<Queue manager="QMTest" objName="TASK4.IN" queue="TASK4.IN"/>
+		<Queue manager="QMTest" objName="TASK4.OUT" queue="TASK4.OUT"/>
+		<Queue manager="QMTest" objName="TASK4.RESP" queue="TASK4.RESP"/>
+		<Queue manager="QMTest" objName="TASK4.TO.EXTERNAL.SYSTEM" queue="TASK4.TO.EXTERNAL.SYSTEM"/>
+		<Queue manager="QMTest" objName="TASK4.FROM.EXTERNAL.SYSTEM" queue="TASK4.FROM.EXTERNAL.SYSTEM"/>
+		<Queue manager="QMTest" objName="TASK4.STORE" queue="TASK4.STORE"/>
+		<Queue manager="QMTest" objName="TASK4.ERROR" queue="TASK4.ERROR"/>
+		
+		<Queue manager="QMTest" objName="TASK5.IN" queue="TASK5.IN"/>
+		<Queue manager="QMTest" objName="TASK5.OUT" queue="TASK5.OUT"/>
+		<Queue manager="QMTest" objName="TASK5.ERROR" queue="TASK5.ERROR"/>
+		<Queue manager="QMTest" objName="TASK5.STORE" queue="TASK5.STORE"/>
+		<Queue manager="QMTest" objName="TASK5.TO.EXTERNAL.SYSTEM" queue="TASK5.TO.EXTERNAL.SYSTEM"/>
+		<Queue manager="QMTest" objName="TASK5.FROM.EXTERNAL.SYSTEM" queue="TASK5.FROM.EXTERNAL.SYSTEM"/>
+		
+		<Queue manager="QMTest" objName="TASK7.IN" queue="TASK7.IN"/>
+		<Queue manager="QMTest" objName="TASK7.OUT" queue="TASK7.OUT"/>
+		<Queue manager="QMTest" objName="TASK7.ERROR" queue="TASK7.ERROR"/>
+		
+		<Database host="192.168.14.73" objName="task8_db" port="3306" type="mysql" 
+              userName="root" userPass="root"> 
+		</Database>
+		
+      	<Queue manager="QMTest" objName="TASK8.IN" queue="TASK8.IN"/>
+		<Queue manager="QMTest" objName="TASK8.OUT" queue="TASK8.OUT"/>
+		<Queue manager="QMTest" objName="TASK8.ERROR" queue="TASK8.ERROR"/>
+		<Queue manager="QMTest" objName="TASK8.STORE" queue="TASK8.STORE"/>
+		<Queue manager="QMTest" objName="TASK8.TO.EXTERNAL.SYSTEM" queue="TASK8.TO.EXTERNAL.SYSTEM"/>
+		<Queue manager="QMTest" objName="TASK8.FROM.EXTERNAL.SYSTEM" queue="TASK8.FROM.EXTERNAL.SYSTEM"/>
+              
+	</Resources>
+	<Libraries> 
+    		<path>Lib/mysql-connector-java-8.0.27.jar</path> 
+		</Libraries>
+</GlobalSettings>

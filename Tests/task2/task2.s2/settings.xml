@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="" name="task2.s2" xsi:noNamespaceSchemaLocation="http://ctt.cinimex.ru/testSettings.xsd">
+	<ClearQueue> 
+    	<Queue objName="TMP.TASK2.OUT"/> 
+	</ClearQueue> 
+	<ClearQueue>
+		<Queue objName="TMP.TASK2.RESP"/>
+	</ClearQueue>
+	<GetTemplate path="Templates/task2/ex2_msg1_invalid.xml" variable="msgInv"/>
+	<SendMessage variable="msgInv"> 
+    	<Queue objName="TMP.TASK2.IN"/> 
+	</SendMessage>
+	<WaitQueueDepth attempts="10" waitForValue="1" waitStep="1000">  
+    	<Queue objName="TMP.TASK2.RESP"/> 
+	</WaitQueueDepth> 
+	<GetMessage>
+		<Queue objName="TMP.TASK2.RESP"/> 
+    	<Message variable="msg_respInv"/>  
+	</GetMessage>
+
+	<ValidateXmlDocument schemaPath="WSDL/task2/Transaction-Result.xsd" variable="msg_respInv"/>
+
+
+</Test>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="" name="task7.s2" xsi:noNamespaceSchemaLocation="http://ctt.cinimex.ru/testSettings.xsd">
+	<ClearQueue> 
+    	<Queue objName="TASK7.OUT"/> 
+		<Queue objName="TASK7.ERROR"/>
+	</ClearQueue> 
+	<GetTemplate path="Templates/task7/ex7_msg_valid_code.xml" variable="msg_bcz"/>
+	<SendMessage variable="msg_bcz"> 
+    	<Queue objName="TASK7.IN"/>      			
+	</SendMessage>
+	<WaitQueueDepth attempts="10" waitForValue="1" waitStep="1000"> 
+    	<Queue objName="TASK7.OUT"/>  
+	</WaitQueueDepth> 
+	<GetMessage> 
+    	<Queue objName="TASK7.OUT"/> 
+    	<Message variable="msg_out"/> 
+	</GetMessage>
+	<ValidateXmlDocument schemaPath="WSDL/task7/Transaction-Details.xsd" variable="msg_out"/> 
+
+
+</Test>

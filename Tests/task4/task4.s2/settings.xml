@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="" name="task4.s2" xsi:noNamespaceSchemaLocation="http://ctt.cinimex.ru/testSettings.xsd">
+
+	<ClearQueue> 
+    	<Queue objName="TASK4.OUT"/> 
+		<Queue objName="TASK4.TO.EXTERNAL.SYSTEM"/>
+		<Queue objName="TASK4.STORE"/>
+		<Queue objName="TASK4.FROM.EXTERNAL.SYSTEM"/>
+		<Queue objName="TASK4.ERROR"/>
+	</ClearQueue> 
+	<GetTemplate path="Templates/task4/ex4_msg1.xml" variable="msg"/>
+	<SendMessage variable="msg"> 
+    	<Queue objName="TASK4.IN"/>      			
+	</SendMessage>
+	<WaitQueueDepth attempts="20" waitForValue="1" waitStep="1000"> 
+    	<Queue objName="TASK4.TO.EXTERNAL.SYSTEM"/> 
+	</WaitQueueDepth>
+	<GetMessage> 
+    	<Queue objName="TASK4.TO.EXTERNAL.SYSTEM"/> 
+    	<Message variable="msg_ext1"> 
+    	 <get> 
+        	<mqmds> 
+            	<mqmd header="correlationId" variable="cor1"/> 
+        	</mqmds>
+        </get>
+        </Message>
+	</GetMessage>
+	<ValidateXmlDocument schemaPath="WSDL/task4/Transaction-Ask-For-Permission.xsd" variable="msg_ext1"/>
+	<WaitQueueDepth attempts="20" waitForValue="1" waitStep="1000"> 
+    	<Queue objName="TASK4.STORE"/> 
+	</WaitQueueDepth>
+	<BrowseQueue browseInterval="100" encoding="UTF-8" ignoreUnwaitedMessages="false" maxTime="10000" 
+             mustBe="true" name="browsQ" notSave="false"> 
+    	<Queue objName="TASK4.STORE"/> 
+    	<Message variable="msg_store1">
+        	<mqmd header="correlationId"  variable="cor1"/> 
+        </Message>
+ 	</BrowseQueue>
+ 	<Log>#cor1#</Log>	
+	<GetTemplate path="Templates/task4/ex4_answer_from_system.xml" variable="msg_answer"/>
+	<SendMessage variable="msg_answer"> 
+    	<Queue objName="TASK4.FROM.EXTERNAL.SYSTEM"/>  
+    	<set> 
+            	<mqmd header="correlationId" value="000000000000000000000000000000000000000088888888"/> 
+        </set>     			
+	</SendMessage>	
+	<WaitQueueDepth attempts="20" waitForValue="1" waitStep="1000"> 
+    	<Queue objName="TASK4.ERROR"/> 
+	</WaitQueueDepth>
+	<GetMessage>
+		<Queue objName="TASK4.ERROR"/> 
+    	<Message variable="msg_ERROR">  
+    		<get>
+    		<rfh2>
+    			<getStringProperty name="ERROR" variable="Error_h"/>
+			</rfh2> 
+        	</get>	 
+		</Message>			
+	</GetMessage>
+	
+	<AssertEquals caseSensitivity="false" logLevel="fatal" value="Not found message in store" variable="Error_h"/>  	
+	
+</Test>
+
+
+

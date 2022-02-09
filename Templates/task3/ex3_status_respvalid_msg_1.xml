@@ -1,0 +1,4 @@
+<Transaction-Result xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Transaction-Result.xsd">
+	<TimeStamp>2016-02-04T09:47:14Z</TimeStamp>
+	<Validation-Result>org.custommonkey.xmlunit.Validator@11d1c6b5:[valid]</Validation-Result>
+</Transaction-Result>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by CINIMEX INFORMATICA (CINIMEX INFORMATICA) -->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://new.webservice.namespace" targetNamespace="http://new.webservice.namespace">
+	<wsdl:import namespace="http://www.cinimex.ru/rim/common" location="Transaction-Ask-For-Permission.xsd"/>
+	<wsdl:import namespace="http://www.cinimex.ru/rim/diffcommon" location="Transaction-Permission-Answer.xsd"/>
+	<wsdl:types>
+		<xs:schema targetNamespace="http://new.webservice.namespace" elementFormDefault="qualified"/>
+	</wsdl:types>
+	<wsdl:message name="InputData">
+		<wsdl:part name="parameter" element="Transaction-Permission-Ask"/>
+	</wsdl:message>
+	<wsdl:message name="OutputData">
+		<wsdl:part name="parameter" element="Transaction-Permission-Answer"/>
+	</wsdl:message>
+	<!--<wsdl:message name="SOAP-Fault">
+		<wsdl:part name="parameter" element="SOAPException"/>
+	</wsdl:message>-->
+	<wsdl:message name="NewMessage"/>
+	<wsdl:portType name="NewPortType">
+		<wsdl:operation name="PermissionRequest">
+			<wsdl:input name="InputData" message="tns:InputData"/>
+			<wsdl:output name="OutputData" message="tns:OutputData"/>
+			<!--<wsdl:fault name="SOAP-Fault" message="tns:SOAP-Fault"/>-->
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="NewBinding" type="tns:NewPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="PermissionRequest">
+			<soap:operation soapAction="urn:#NewOperation"/>
+			<wsdl:input name="InputData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="OutputData">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<!--<wsdl:fault name="SOAP-Fault">
+				<soap:fault name="SOAP-Fault" use="literal"/>
+			</wsdl:fault>-->
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="NewService">
+		<wsdl:port name="BasicHttpBinding_ServiceClass" binding="tns:NewBinding">
+			<soap:address location="http://Study-test-server/PermissionRequest"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

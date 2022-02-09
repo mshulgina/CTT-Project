@@ -1,0 +1,129 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fxop="http://www.cinimex.ru/rim/fxOptionService" xmlns:fxop1="http://www.cinimex.ru/rim/fxOption" xmlns:com="http://www.cinimex.ru/rim/common">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <fxop:CreateFxOptionElem>
+         <fxop:fxOptionElem>
+            <fxop1:header>
+               <com:repository>NSD</com:repository>
+               <!--Optional:-->
+               <com:send_now>true</com:send_now>
+               <!--Optional:-->
+               <com:messageId>?</com:messageId>
+               <!--Optional:-->
+               <com:sentBy>?</com:sentBy>
+               <!--Optional:-->
+               <com:creationTimestamp>2001-12-17T09:30:47Z</com:creationTimestamp>
+            </fxop1:header>
+            <!--3 or more repetitions:-->
+            <fxop1:partyTradeIdentifier>
+               <com:partyReference href="ID_1"/>
+               <com:tradeId>?</com:tradeId>
+               <!--Optional:-->
+               <com:linkId>?</com:linkId>
+            </fxop1:partyTradeIdentifier>
+            <fxop1:partyTradeIdentifier>
+               <com:partyReference href="ID_1"/>
+               <com:tradeId>?</com:tradeId>
+               <!--Optional:-->
+               <com:linkId>?</com:linkId>
+            </fxop1:partyTradeIdentifier>
+            <fxop1:partyTradeIdentifier>
+               <com:partyReference href="ID_1"/>
+               <com:tradeId>?</com:tradeId>
+               <!--Optional:-->
+               <com:linkId>?</com:linkId>
+            </fxop1:partyTradeIdentifier>
+            <fxop1:ReportingRegimeName>?</fxop1:ReportingRegimeName>
+            <fxop1:trade>
+               <com:tradeDate>2016-01-01</com:tradeDate>
+               <!--Optional:-->
+               <com:clearedDate>2016-01-01</com:clearedDate>
+               <!--Optional:-->
+               <com:asOfDate>2016-01-01</com:asOfDate>
+               <!--Optional:-->
+               <com:agreementDate>2016-01-01</com:agreementDate>
+               <!--Optional:-->
+               <com:effectiveDate>2016-01-01</com:effectiveDate>
+            </fxop1:trade>
+            <fxop1:fxOptionDeal>
+               <fxop1:productType>?</fxop1:productType>
+               <fxop1:productId>?</fxop1:productId>
+               <fxop1:buyerPartyReference href="ID_1"/>
+               <fxop1:sellerPartyReference href="ID_1"/>
+               <fxop1:soldAs>Call</fxop1:soldAs>
+               <!--You have a CHOICE of the next 2 items at this level-->
+               <!--Optional:-->
+               <fxop1:americanExerciseLatestValueDate>2016-01-01</fxop1:americanExerciseLatestValueDate>
+               <fxop1:americanExerciseExpiryDate>2016-01-01</fxop1:americanExerciseExpiryDate>
+               <fxop1:americanExerciseUnadjustedDate>2016-01-01</fxop1:americanExerciseUnadjustedDate>
+               <fxop1:putCurrencyAmountCurrency>?</fxop1:putCurrencyAmountCurrency>
+               <fxop1:putCurrencyAmountAmount>13.13</fxop1:putCurrencyAmountAmount>
+               <fxop1:callCurrencyAmountCurrency>?</fxop1:callCurrencyAmountCurrency>
+               <fxop1:callCurrencyAmountAmount>13.13</fxop1:callCurrencyAmountAmount>
+               <fxop1:strikeRate>13.13</fxop1:strikeRate>
+               <fxop1:strikeStrikeQuoteBasis>CallCurrencyPerPutCurrency</fxop1:strikeStrikeQuoteBasis>
+               <fxop1:payerPartyReference href="ID_1"/>
+               <fxop1:receiverPartyReference href="ID_1"/>
+               <fxop1:premiumCurrency>?</fxop1:premiumCurrency>
+               <fxop1:premiumAmount>11.1</fxop1:premiumAmount>
+            </fxop1:fxOptionDeal>
+            <!--1 or more repetitions:-->
+            <fxop1:party id="ID_1">
+               <!--1 to 2 repetitions:-->
+               <com:partyId>?</com:partyId>
+               <com:partyIdType>BLOOM</com:partyIdType>
+               <!--Optional:-->
+               <com:partyName>?</com:partyName>
+            </fxop1:party>
+            <fxop1:nsdSpecificTradeFields>
+               <com:reconciliationType>FULL</com:reconciliationType>
+               <com:clearSettlementType>?</com:clearSettlementType>
+               <com:clearSettlementMethod>?</com:clearSettlementMethod>
+               <!--Optional:-->
+               <com:clearingOrganizationCode>?</com:clearingOrganizationCode>
+               <!--Optional:-->
+               <com:clearingCentralCounterpartyCode>?</com:clearingCentralCounterpartyCode>
+               <!--Zero or more repetitions:-->
+               <com:classificationSpecificCode>
+                  <com:classificationCodeSpecificCode>ProductRelation</com:classificationCodeSpecificCode>
+                  <com:classificationCodeCode>?</com:classificationCodeCode>
+               </com:classificationSpecificCode>
+            </fxop1:nsdSpecificTradeFields>
+            <!--Zero or more repetitions:-->
+            <fxop1:ProductLegSpecific>
+               <com:productLegSpecificLegIdReference>?</com:productLegSpecificLegIdReference>
+               <!--1 or more repetitions:-->
+               <com:productLegSpecificCode>
+                  <com:productLegSpecificCodeType>ProductRelation</com:productLegSpecificCodeType>
+                  <com:productLegSpecificCode>?</com:productLegSpecificCode>
+               </com:productLegSpecificCode>
+            </fxop1:ProductLegSpecific>
+            <!--Optional:-->
+            <fxop1:Collateral>
+               <!--Optional:-->
+               <com:collateralPayerPartyReference href="ID_1"/>
+               <!--Optional:-->
+               <com:collateralReceiverPartyReference href="ID_1"/>
+               <!--Optional:-->
+               <com:collateralPeriodMultiplier>2</com:collateralPeriodMultiplier>
+               <!--Optional:-->
+               <com:collateralPeriod>M</com:collateralPeriod>
+               <!--Optional:-->
+               <com:collateralPriceSource>?</com:collateralPriceSource>
+               <!--Optional:-->
+               <com:collateralMarginType>?</com:collateralMarginType>
+               <!--Zero or more repetitions:-->
+               <com:CollateralPaymentDetails>
+                  <com:collateralDate>2016-01-01</com:collateralDate>
+                  <!--Optional:-->
+                  <com:collateralCurrency>?</com:collateralCurrency>
+                  <!--Zero or more repetitions:-->
+                  <com:collateralAmount>11.0</com:collateralAmount>
+               </com:CollateralPaymentDetails>
+            </fxop1:Collateral>
+         </fxop:fxOptionElem>
+         <!--Optional:-->
+         <com:MIRLinkId>?</com:MIRLinkId>
+      </fxop:CreateFxOptionElem>
+   </soapenv:Body>
+</soapenv:Envelope>

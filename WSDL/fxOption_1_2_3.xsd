@@ -1,0 +1,1270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--edited with XMLSpy v2013 rel. 2 sp1 (x64) (http://www.altova.com) by CINIMEX-INFORMATIKA (CINIMEX-INFORMATIKA)--><xs:schema elementFormDefault="qualified" targetNamespace="http://www.cinimex.ru/rim/diffcommon" xmlns="http://www.cinimex.ru/rim/diffcommon" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="PartyTradeIdentifierType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="partyReference" type="IdRefType"/>
+      <xs:element minOccurs="0" name="tradeId" type="xs:string"/>
+      <xs:element minOccurs="0" name="linkId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MAPartyTradeIdentifierType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="partyReference" type="IdRefType"/>
+      <xs:element minOccurs="0" name="tradeId" type="xs:string"/>
+      <!--xs:element name="linkId" type="xs:string"/-->
+    </xs:sequence>
+  </xs:complexType>
+  <!--xs:complexType name="PartyTradeInformationType">
+		<xs:sequence>
+			<xs:element name="partyReference" type="IdRefType"/>
+			<xs:element name="reportingRegimeName" type="xs:string"/>
+			<xs:element name="supervisorRegistration" type="xs:string" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType-->
+  <xs:complexType name="TradeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="tradeDate" type="xs:date"/>
+      <xs:element minOccurs="0" name="clearedDate" type="xs:date"/>
+      <xs:element minOccurs="0" name="asOfDate" type="xs:date"/>
+      <xs:element minOccurs="0" name="agreementDate" type="xs:date"/>
+      <xs:element minOccurs="0" name="effectiveDate" type="xs:date"/>
+      <!--<xs:element name="calculationAgentPartyReference" type="IdRefType" minOccurs="0"/>-->
+      <!--<xs:element name="calculationAgentBusinessCenter" type="xs:string" minOccurs="0"/>-->
+      <!--<xs:element name="documentation" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>-->
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HeaderType">
+    <xs:sequence>
+      <!--xs:element name="messageType" type="xs:string"/-->
+      <xs:element minOccurs="0" name="repository" type="RepositoryType"/>
+      <xs:element minOccurs="0" name="send_now" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="messageId">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="35"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <!--xs:element name="productIds" type="ProductIdsType"/-->
+      <xs:element minOccurs="0" name="sentBy">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="35"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="creationTimestamp" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MAHeaderType">
+    <xs:sequence>
+      <!--xs:element name="messageType" type="xs:string"/-->
+      <xs:element minOccurs="0" name="repository" type="RepositoryType"/>
+      <xs:element minOccurs="0" name="send_now" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="messageId">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="35"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <!--xs:element name="productIds" type="ProductIdsType"/-->
+      <xs:element minOccurs="0" name="sentBy">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="35"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="creationTimestamp" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PartyType">
+    <xs:complexContent>
+      <xs:extension base="IdType">
+        <xs:sequence>
+          <xs:element maxOccurs="2" minOccurs="0" name="partyId" type="xs:string"/>
+          <xs:element minOccurs="0" name="partyIdType" type="tradeIdTypeEnum"/>
+          <xs:element minOccurs="0" name="partyName" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="additionalPartyType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="partyId" type="xs:string"/>
+      <xs:element minOccurs="0" name="partyIdType" type="tradeIdTypeEnum"/>
+      <xs:element minOccurs="0" name="partyName" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+  <!--xs:complexType name="AccountType">
+		<xs:complexContent>
+			<xs:extension base="IdType">
+				<xs:sequence>
+					<xs:choice>
+						<xs:sequence>
+							<xs:element name="accountId" type="xs:string"/>
+							<xs:element name="accountIdType" type="xs:string"/>
+						</xs:sequence>
+					</xs:choice>
+					<xs:element name="accountName" type="xs:string" minOccurs="0"/>
+					<xs:element name="accountType" type="xs:string" minOccurs="0"/>
+					<xs:element name="accountBeneficiary" type="IdRefType"/>
+					<xs:element name="servicingParty" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType-->
+  <xs:complexType name="NsdSpecificTradeFieldsType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="reconciliationType" type="ReconciliationType"/>
+      <xs:element minOccurs="0" name="clearSettlementType" type="xs:string"/>
+      <xs:element minOccurs="0" name="clearSettlementMethod" type="xs:string"/>
+      <xs:element minOccurs="0" name="regulatoryStatus" type="RegulatoryStatusEnum"/>
+      <xs:element minOccurs="0" name="clearingOrganizationCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="clearingCentralCounterpartyCode" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="classificationSpecificCode" type="ClassificationSpecificCodeType"/>
+      <!--<xs:element name="classificationCodeSpecificCode" type="ProductRelation" minOccurs="0"/>
+			<xs:element name="classificationCodeCode" type="xs:string" minOccurs="0"/>-->
+      <!--<xs:element name="startAgreementDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="endAgreementDate" type="xs:date" minOccurs="0"/>-->
+      <!--<xs:element name="productGeneralCodeType" type="ProductRelation" minOccurs="0"/>
+			<xs:element name="productGeneralCode" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="productLegSpecificLeg" type="ProductLegSpecific" minOccurs="0"/>-->
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProductLegSpecificType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="productLegSpecificLegIdReference" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="productLegSpecificCode" type="ProductLegSpecificCodeType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ClassificationSpecificCodeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="classificationCodeSpecificCode" type="ProductRelation"/>
+      <xs:element minOccurs="0" name="classificationCodeCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProductLegSpecificCodeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="productLegSpecificCodeType" type="ProductRelation"/>
+      <xs:element minOccurs="0" name="productLegSpecificCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CollateralType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="collateralPayerPartyReference" type="IdRefType"/>
+      <xs:element minOccurs="0" name="collateralReceiverPartyReference" type="IdRefType"/>
+      <xs:element minOccurs="0" name="collateralPeriodMultiplier" type="xs:positiveInteger"/>
+      <xs:element minOccurs="0" name="collateralPeriod" type="PeriodExtendedEnum"/>
+      <xs:element minOccurs="0" name="collateralPriceSource" type="xs:string"/>
+      <xs:element minOccurs="0" name="collateralMarginType" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="CollateralPaymentDetails" type="CollateralPaymentDetailsType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CollateralPaymentDetailsType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="collateralDate" type="xs:date"/>
+      <xs:element minOccurs="0" name="collateralCurrency" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="collateralAmount" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UnadjustedDateType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="unadjustedDate" type="xs:date"/>
+      <xs:element minOccurs="0" name="businessDayConvention" type="BusinessDayConventionType"/>
+      <xs:element minOccurs="0" name="businessCenters" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TenorType">
+    <xs:choice>
+      <xs:element minOccurs="0" name="tenorName" type="xs:string"/>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="periodMultiplier" type="xs:string"/>
+        <xs:element minOccurs="0" name="period" type="xs:string"/>
+      </xs:sequence>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="StepType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:date"/>
+      <xs:element minOccurs="0" name="value" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ScheduledValueType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="initialValue" type="xs:decimal"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="step" type="StepType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IdRefType">
+    <xs:attribute name="href" type="xs:IDREF" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="IdType">
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+  </xs:complexType>
+  <xs:simpleType name="CurrencyType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--==================== Codebooks ===========================-->
+  <xs:simpleType name="DealtCurrencyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ExchangedCurrency1"/>
+      <xs:enumeration value="ExchangedCurrency2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RepositoryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NSD"/>
+      <xs:enumeration value="RTS"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tradeIdTypeLimitedEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RPZR"/>
+      <xs:enumeration value="ABS"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tradeIdTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RPZR"/>
+      <xs:enumeration value="ABS"/>
+      <xs:enumeration value="OGRN"/>
+      <xs:enumeration value="RBIC"/>
+      <xs:enumeration value="SBIC"/>
+      <xs:enumeration value="RINN"/>
+      <!--далле типы для нерезидентов-->
+      <xs:enumeration value="BLOOM"/>
+      <xs:enumeration value="THRTR"/>
+      <xs:enumeration value="LEI"/>
+      <xs:enumeration value="OWN"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SpecifiedPriceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Afternoon"/>
+      <xs:enumeration value="Ask"/>
+      <xs:enumeration value="Bid"/>
+      <xs:enumeration value="Closing"/>
+      <xs:enumeration value="High"/>
+      <xs:enumeration value="Index"/>
+      <xs:enumeration value="MeanOfBidAndAsk"/>
+      <xs:enumeration value="LocationalMarginal"/>
+      <xs:enumeration value="Low"/>
+      <xs:enumeration value="MarginalHourly"/>
+      <xs:enumeration value="MarketClearing"/>
+      <xs:enumeration value="MeanOfHighAndLow"/>
+      <xs:enumeration value="Morning"/>
+      <xs:enumeration value="Official"/>
+      <xs:enumeration value="Opening"/>
+      <xs:enumeration value="OSP"/>
+      <xs:enumeration value="Settlement"/>
+      <xs:enumeration value="Spot"/>
+      <xs:enumeration value="Midpoint"/>
+      <xs:enumeration value="NationalSingle"/>
+      <xs:enumeration value="WeightedAverage"/>
+      <xs:enumeration value="UnWeightedAverage"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DayCountFractionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="1/1"/>
+      <xs:enumeration value="30/360"/>
+      <xs:enumeration value="30E/360"/>
+      <xs:enumeration value="30E/360.ISDA"/>
+      <xs:enumeration value="ACT/360"/>
+      <xs:enumeration value="ACT/365.FIXED"/>
+      <xs:enumeration value="ACT/365L"/>
+      <xs:enumeration value="ACT/ACT.AFB"/>
+      <xs:enumeration value="ACT/ACT.ICMA"/>
+      <xs:enumeration value="ACT/ACT.ISDA"/>
+      <xs:enumeration value="ACT/ACT.ISMA"/>
+      <xs:enumeration value="BUS/252"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RepoDurationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Overnight"/>
+      <xs:enumeration value="Term"/>
+      <xs:enumeration value="Open"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MarginType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Cash"/>
+      <xs:enumeration value="Instrument"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BusinessDayConventionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FOLLOWING"/>
+      <xs:enumeration value="FRN"/>
+      <xs:enumeration value="MODFOLLOWING"/>
+      <xs:enumeration value="PRECEDING"/>
+      <xs:enumeration value="MODPRECEDING"/>
+      <xs:enumeration value="MODPRECEDING"/>
+      <xs:enumeration value="NONE"/>
+      <xs:enumeration value="NotApplicable"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PartyRefType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="all"/>
+      <xs:enumeration value="Party1"/>
+      <xs:enumeration value="Party2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ServicingPartyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Party1"/>
+      <xs:enumeration value="Party2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ServicePayerType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Party1"/>
+      <xs:enumeration value="Party2"/>
+      <xs:enumeration value="all"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ClearanceSystemType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Clearstream"/>
+      <xs:enumeration value="CREST"/>
+      <xs:enumeration value="DTCC"/>
+      <xs:enumeration value="Euroclear"/>
+      <xs:enumeration value="MonteTitoli"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CouponType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Fixed"/>
+      <xs:enumeration value="Float"/>
+      <xs:enumeration value="Struct"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="QuoteBasisType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Currency1PerCurrency2"/>
+      <xs:enumeration value="Currency2PerCurrency1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ReconciliationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FULL"/>
+      <xs:enumeration value="GENF"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ProductRelation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ProductRelation"/>
+      <xs:enumeration value="FixedRateChange"/>
+      <xs:enumeration value="FloatingRateChange"/>
+      <xs:enumeration value="NotionalChange"/>
+      <xs:enumeration value="UnderlierValuation"/>
+      <xs:enumeration value="PaymentFrequency"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ReportingRoleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ALLD"/>
+      <xs:enumeration value="fxSWAP"/>
+      <xs:enumeration value="REPO"/>
+      <xs:enumeration value="DLS4"/>
+      <xs:enumeration value="fxSingleLeg"/>
+      <xs:enumeration value="fxOption"/>
+      <xs:enumeration value="fxDigitalOption"/>
+      <xs:enumeration value="fra"/>
+      <xs:enumeration value="swap"/>
+      <xs:enumeration value="capFloor"/>
+      <xs:enumeration value="swaption"/>
+      <xs:enumeration value="bondSimpleTransaction"/>
+      <xs:enumeration value="bondForward"/>
+      <xs:enumeration value="bondOption"/>
+      <xs:enumeration value="basketBondOption"/>
+      <xs:enumeration value="equitySimpleTransaction"/>
+      <xs:enumeration value="equityOption"/>
+      <xs:enumeration value="commodityForward"/>
+      <xs:enumeration value="commodityOption"/>
+      <xs:enumeration value="commoditySwap"/>
+      <xs:enumeration value="bondSwap"/>
+      <xs:enumeration value="equitySwapTransactionSupplement"/>
+      <xs:enumeration value="creditDefaultSwap"/>
+      <xs:enumeration value="creditDefaultSwaption"/>
+      <xs:enumeration value="generalProduct"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--===================== Service types =====================-->
+  <xs:element name="GetById" type="RequestByIdType"/>
+  <xs:element name="GetByContrapartyAndProduct" type="RequestByContrapartyAndProductType"/>
+  <xs:element name="RetractById" type="RequestByIdType"/>
+  <xs:element name="MIRContractId" type="xs:string"/>
+  <xs:element name="MIRLinkId" type="xs:string"/>
+  <xs:complexType name="RequestByIdType">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element minOccurs="0" name="id" type="ProductIdType"/>
+        <xs:element minOccurs="0" name="MirId" type="xs:positiveInteger"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RequestByContrapartyAndProductType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ContrapartyInternalId" type="xs:string"/>
+      <xs:element minOccurs="0" name="Product" type="ProductEnum"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WsResponseElem" type="WsResponse"/>
+  <xs:complexType name="WsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="status" type="WsStatusType"/>
+      <xs:element minOccurs="0" name="code" type="WsResponseCodeType"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+      <xs:element minOccurs="0" name="mirId" type="xs:positiveInteger"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="WsStatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SUCCESS"/>
+      <xs:enumeration value="IMPORTED_WITH_ERRORS"/>
+      <xs:enumeration value="FAULT"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WsResponseCodeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PROCESSING_FAILED"/>
+      <xs:enumeration value="TARGET_DOCUMENT_NOT_FOUND"/>
+      <xs:enumeration value="INCORRECT_REQUEST"/>
+      <xs:enumeration value="UNLOAD_ERROR"/>
+      <xs:enumeration value="CLIENT_NOT_FOUND"/>
+      <xs:enumeration value="MESSAGE_ID_ALREADY_EXISTS"/>
+      <xs:enumeration value="WRONG_DOCUMENT_STATUS"/>
+      <xs:enumeration value="MULTIPLE_OBJECTS_FOUND"/>
+      <xs:enumeration value="CLIENT_IS_IN_DEPRECATION_LIST"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="StatusElem" type="StatusType"/>
+  <xs:complexType name="StatusType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="productIds" type="ProductIdsType"/>
+      <xs:element minOccurs="0" name="MirId" type="xs:string"/>
+      <xs:element minOccurs="0" name="productType" type="xs:string"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProductIdsType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="productId" type="ProductIdType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProductIdType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="ProductIdTypeType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ProductIdTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NSD"/>
+      <xs:enumeration value="RTS"/>
+      <xs:enumeration value="BANK"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Currency-->
+  <xs:complexType name="ExchangedCurrencyType">
+    <xs:complexContent>
+      <xs:extension base="CommonExchangedCurrencyType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paymentDate" type="xs:date"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CommonExchangedCurrencyType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="payerPartyReference" type="IdRefType"/>
+      <xs:element minOccurs="0" name="receiverPartyReference" type="IdRefType"/>
+      <xs:element minOccurs="0" name="amount" type="PositiveDecimal"/>
+      <xs:element minOccurs="0" name="currency" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--Change course-->
+  <xs:complexType name="ExchangeRateType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="rate" type="PositiveDecimal"/>
+      <xs:element minOccurs="0" name="quotedCurrencyPair" type="QuotedCurrencyPairType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QuotedCurrencyPairType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="currency1" type="xs:string"/>
+      <xs:element minOccurs="0" name="currency2" type="xs:string"/>
+      <xs:element minOccurs="0" name="quoteBasis" type="QuoteBasisType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--~~Equity exercise types by GYolshin 11.03.2014~~-->
+  <xs:complexType name="EuropeanExerciseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="expirationDate" type="xs:date"/>
+      <!--Ver 3.2-->
+      <!--<xs:choice>-->
+      <!--Ver 3.2 Added minOccurs="0"-->
+      <!--<xs:element name="equityExpirationTimeType" type="TimeTypeEnum" minOccurs="0"/>-->
+      <!--Ver 3.2 Added ncf parameter-->
+      <!--<xs:element name="expirationTimeDetermination" type="DeterminationMethodType"/>-->
+      <!--</xs:choice>-->
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AmericanExerciseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="expirationDate" type="xs:date"/>
+      <!--Ver 3.2 Added ncf parameter-->
+      <!--<xs:element name="latestExerciseTimeType" type="TimeTypeEnum"/>-->
+      <!--<xs:choice>
+				<xs:sequence>
+					<xs:element name="hourMinuteTime" type="xs:time"/>
+					<xs:element name="businessCenter" type="xs:string"/>
+				</xs:sequence>-->
+      <!--Ver 3.2 Added ncf parameter-->
+      <!--<xs:element name="latestExerciseTimeDetermination" type="DeterminationMethodType"/>-->
+      <!--</xs:choice>-->
+      <!--<xs:choice>-->
+      <!--Ver 3.2 Added minOccurs="0"-->
+      <!--<xs:element name="equityExpirationTimeType" type="TimeTypeEnum" minOccurs="0"/>-->
+      <!--Ver 3.2 Added ncf parameter-->
+      <!--<xs:element name="expirationTimeDetermination" type="DeterminationMethodType"/>-->
+      <!--</xs:choice>-->
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BermudaExerciseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="expirationDate" type="xs:date"/>
+      <!--<xs:choice>-->
+      <!--Ver 3.2 Added ncf parameter-->
+      <!--<xs:element name="latestExerciseTimeDetermination" type="DeterminationMethodType"/>-->
+      <!--<xs:sequence>
+					<xs:element name="hourMinuteTime" type="xs:time"/>
+					<xs:element name="businessCenter" type="xs:string"/>
+				</xs:sequence>
+			</xs:choice>-->
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="bermudaExerciseDates" type="xs:date"/>
+      <!--<xs:choice>-->
+      <!--Ver 3.2 Added minOccurs="0"-->
+      <!--<xs:element name="equityExpirationTimeType" type="TimeTypeEnum" minOccurs="0"/>-->
+      <!--Ver 3.2 Added ncf parameter-->
+      <!--<xs:element name="expirationTimeDetermination" type="DeterminationMethodType"/>-->
+      <!--</xs:choice>-->
+    </xs:sequence>
+  </xs:complexType>
+  <!--~~Simple asset types by GYolshin 7.03.2014~~-->
+  <xs:complexType name="UnderlyingAssetType">
+    <xs:choice>
+      <xs:element minOccurs="0" name="Bond" type="BondType"/>
+      <xs:element minOccurs="0" name="Cash" type="CashType"/>
+      <xs:element minOccurs="0" name="Commodity" type="CommodityType"/>
+      <xs:element minOccurs="0" name="ConvertibleBond" type="ConvertibleBondType"/>
+      <xs:element minOccurs="0" name="Equity" type="EquityType"/>
+      <xs:element minOccurs="0" name="ExchangeTradedFund" type="ExchangeTradedFundType"/>
+      <xs:element minOccurs="0" name="Future" type="FutureType"/>
+      <xs:element minOccurs="0" name="Index" type="IndexType"/>
+      <xs:element minOccurs="0" name="Loan" type="LoanType"/>
+      <xs:element minOccurs="0" name="Mortgage" type="MortgageType"/>
+      <xs:element minOccurs="0" name="MutualFund" type="MutualFundType"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="BondType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="instrumentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="currency" type="xs:string"/>
+      <xs:element minOccurs="0" name="issuerName" type="xs:string"/>
+      <xs:element minOccurs="0" name="parValue" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CashType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="instrumentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="currency" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CommodityType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="instrumentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="currency" type="xs:string"/>
+      <xs:element minOccurs="0" name="unit" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="exchangeId" type="xs:string"/>
+      <xs:element minOccurs="0" name="rateSource" type="xs:string"/>
+      <xs:element minOccurs="0" name="deliveryDates" type="DeliveryDatesEnum"/>
+      <xs:element minOccurs="0" name="deliveryDate" type="xs:date"/>
+      <xs:element minOccurs="0" name="deliveryDateYearMonth" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EquityType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="instrumentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="currency" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExchangeTradedFundType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="instrumentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="currency" type="xs:string"/>
+      <xs:element minOccurs="0" name="fundManager" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FutureType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="instrumentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="currency" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IndexType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="instrumentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="currency" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoanType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="instrumentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="currency" type="xs:string"/>
+      <xs:choice maxOccurs="unbounded">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="entityName" type="xs:string"/>
+          <xs:element minOccurs="0" name="entityId" type="xs:string"/>
+        </xs:sequence>
+        <xs:element minOccurs="0" name="borrowerReference" type="IdRefType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MortgageType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="instrumentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="currecny" type="xs:string"/>
+      <xs:element minOccurs="0" name="issuerName" type="xs:string"/>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element minOccurs="0" name="entityName" type="xs:string"/>
+          <xs:element minOccurs="0" name="entityId" type="xs:string"/>
+        </xs:sequence>
+        <xs:element minOccurs="0" name="insurerReference" type="IdRefType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MutualFundType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="instrumentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="currecny" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConvertibleBondType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="instrumentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="currecny" type="xs:string"/>
+      <xs:element minOccurs="0" name="issuerName" type="xs:string"/>
+      <xs:element minOccurs="0" name="parValue" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xsd:simpleType name="PositiveDecimal">
+    <xsd:restriction base="xsd:decimal">
+      <xsd:minExclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="NonNegativeDecimal">
+    <xsd:restriction base="xsd:decimal">
+      <xsd:minInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="FpmlHourMinuteTime">
+    <xsd:restriction base="xsd:time">
+      <xsd:pattern value="[0-2][0-9]:[0-5][0-9]:00"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="DecimalBelowOne">
+    <xsd:restriction base="xsd:decimal">
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!--~~Additional types by GYolshin 12.03.2014~~-->
+  <xs:simpleType name="SettlementTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Election"/>
+      <xs:enumeration value="Cash"/>
+      <xs:enumeration value="Physical"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SettlementPriceSourceEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Bid"/>
+      <xs:enumeration value="Mid"/>
+      <xs:enumeration value="NASDAQ"/>
+      <xs:enumeration value="Offer"/>
+      <xs:enumeration value="OfficialClose"/>
+      <xs:enumeration value="OfficialSettlement"/>
+      <xs:enumeration value="PrezzoDiRiferimento"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="QuotationMethodEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Bid"/>
+      <xs:enumeration value="Mid"/>
+      <xs:enumeration value="Ask"/>
+      <xs:enumeration value="ExercisingPartyPays"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ValuationMethodEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Market"/>
+      <xs:enumeration value="Highest"/>
+      <xs:enumeration value="AverageMarket"/>
+      <xs:enumeration value="AverageHighest"/>
+      <xs:enumeration value="BlendedMarket"/>
+      <xs:enumeration value="BlendedHighest"/>
+      <xs:enumeration value="AverageBlendedMarket"/>
+      <xs:enumeration value="AverageBlendedHighest"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TimeTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Close"/>
+      <xs:enumeration value="Open"/>
+      <xs:enumeration value="OSP"/>
+      <xs:enumeration value="SpecificTime"/>
+      <xs:enumeration value="XETRA"/>
+      <xs:enumeration value="DerivativesClose"/>
+      <xs:enumeration value="AsSpecifiedInMasterConfirmation"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DeterminationMethodType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <!--xs:simpleType name="PeriodExtendedEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="T"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="W"/>
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="Y"/>
+		</xs:restriction>
+	</xs:simpleType-->
+  <xs:simpleType name="CoalProductType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CAR125CS"/>
+      <xs:enumeration value="CAR125LS"/>
+      <xs:enumeration value="NXLA"/>
+      <xs:enumeration value="PR84"/>
+      <xs:enumeration value="PR88"/>
+      <xs:enumeration value="PR88LS"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CoalQualityAdjustments">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Clause10Appendix1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CommodityQuantityFrequency">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PerBusinessDay"/>
+      <xs:enumeration value="PerCalculationPeriod"/>
+      <xs:enumeration value="PerHour"/>
+      <xs:enumeration value="PerMonth"/>
+      <xs:enumeration value="PerSettlementPeriod"/>
+      <xs:enumeration value="Term"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SettlementPeriodDurationEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="2Hours"/>
+      <xs:enumeration value="1Hour"/>
+      <xs:enumeration value="30Minutes"/>
+      <xs:enumeration value="15Minutes"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DayOfWeekEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MON"/>
+      <xs:enumeration value="TUE"/>
+      <xs:enumeration value="WED"/>
+      <xs:enumeration value="THU"/>
+      <xs:enumeration value="FRI"/>
+      <xs:enumeration value="SAT"/>
+      <xs:enumeration value="SUN"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TimezoneLocation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UTC-12:00"/>
+      <xs:enumeration value="UTC-11:00"/>
+      <xs:enumeration value="UTC-10:00"/>
+      <xs:enumeration value="UTC-09:00"/>
+      <xs:enumeration value="UTC-08:00"/>
+      <xs:enumeration value="UTC-07:00"/>
+      <xs:enumeration value="UTC-06:00"/>
+      <xs:enumeration value="UTC-05:00"/>
+      <xs:enumeration value="UTC-04:00"/>
+      <xs:enumeration value="UTC-03:00"/>
+      <xs:enumeration value="UTC-02:00"/>
+      <xs:enumeration value="UTC-01:00"/>
+      <xs:enumeration value="UTC"/>
+      <xs:enumeration value="UTC+01:00"/>
+      <xs:enumeration value="UTC+02:00"/>
+      <xs:enumeration value="UTC+03:00"/>
+      <xs:enumeration value="UTC+04:00"/>
+      <xs:enumeration value="UTC+05:00"/>
+      <xs:enumeration value="UTC+06:00"/>
+      <xs:enumeration value="UTC+07:00"/>
+      <xs:enumeration value="UTC+08:00"/>
+      <xs:enumeration value="UTC+09:00"/>
+      <xs:enumeration value="UTC+10:00"/>
+      <xs:enumeration value="UTC+11:00"/>
+      <xs:enumeration value="UTC+12:00"/>
+      <xs:enumeration value="UTC+13:00"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CommodityBusinessCalendar">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AGRUS-FMB"/>
+      <xs:enumeration value="APPI"/>
+      <xs:enumeration value="ARGUS-CRUDE"/>
+      <xs:enumeration value="ARGUS-EUROPEAN-GAS"/>
+      <xs:enumeration value="ARGUS-EUROPEAN-PRODUCTS"/>
+      <xs:enumeration value="ARGUS-INTERNATIONAL-LPG"/>
+      <xs:enumeration value="ARGUS-MCCLOSKEYS-COAL-REPORT"/>
+      <xs:enumeration value="ARGUS-US-PRODUCTS"/>
+      <xs:enumeration value="BALTIC-EXCHANGE"/>
+      <xs:enumeration value="BANK-NEGARA-MALAYSIA-POLICY-COMMITTEE"/>
+      <xs:enumeration value="BLUENEXT"/>
+      <xs:enumeration value="BM&amp;F"/>
+      <xs:enumeration value="BURSA-MALAYSIA-SETTLEMENT"/>
+      <xs:enumeration value="BURSA-MALAYSIA-TRADING"/>
+      <xs:enumeration value="CANADIAN-GAS-PRICE-REPORTER"/>
+      <xs:enumeration value="CBOT-SOFT"/>
+      <xs:enumeration value="CMAI-AROMATICS-MARKET-REPORT"/>
+      <xs:enumeration value="CMAI-GLOBAL-PLASTICS-AND-POLYMERS-MARKET-REPORT"/>
+      <xs:enumeration value="CMAI-METHANOL-MARKET-REPORT"/>
+      <xs:enumeration value="CMAI-MONOMERS-MARKET-REPORT"/>
+      <xs:enumeration value="CME-DAIRY"/>
+      <xs:enumeration value="CME-NON-DAIRY-SOFT"/>
+      <xs:enumeration value="COMEX"/>
+      <xs:enumeration value="CRU"/>
+      <xs:enumeration value="CRU-LONG"/>
+      <xs:enumeration value="DEPARTMENT-OF-ENERGY"/>
+      <xs:enumeration value="DEWITT-BENZENE-DERIVATIVES"/>
+      <xs:enumeration value="DME"/>
+      <xs:enumeration value="DOW-JONES"/>
+      <xs:enumeration value="DOW-JONES-ENERGY-SERVICE"/>
+      <xs:enumeration value="DowJonesPower"/>
+      <xs:enumeration value="EEX-COAL"/>
+      <xs:enumeration value="EEX-EMISSIONS"/>
+      <xs:enumeration value="EEX-GAS"/>
+      <xs:enumeration value="EEX-POWER"/>
+      <xs:enumeration value="EURONEX-MATIF"/>
+      <xs:enumeration value="FERTECON"/>
+      <xs:enumeration value="FERTILIZER-WEEK"/>
+      <xs:enumeration value="GAS-DAILY"/>
+      <xs:enumeration value="GAS-DAILY-PRICE-GUIDE"/>
+      <xs:enumeration value="GLOBALCOAL"/>
+      <xs:enumeration value="HEREN-REPORT"/>
+      <xs:enumeration value="ICE/10X-DAILY"/>
+      <xs:enumeration value="ICE/10X-MONTHLY"/>
+      <xs:enumeration value="ICE-CANADA"/>
+      <xs:enumeration value="ICE-ECX"/>
+      <xs:enumeration value="ICE-GAS"/>
+      <xs:enumeration value="ICE-OIL"/>
+      <xs:enumeration value="ICE-US-AGRICULTURAL"/>
+      <xs:enumeration value="ICIS-PRICING-BENZENE-(EUROPE)"/>
+      <xs:enumeration value="ICIS-PRICING-ETHYLENE-(EUROPE)"/>
+      <xs:enumeration value="ICIS-PRICING-POLYPROPYLENE-(EUROPE)"/>
+      <xs:enumeration value="INSIDE-FERC"/>
+      <xs:enumeration value="JAPAN-MOF-TSRR"/>
+      <xs:enumeration value="KCBOT"/>
+      <xs:enumeration value="KUALA-LUMPUR-BANK"/>
+      <xs:enumeration value="LABUAN-BANK"/>
+      <xs:enumeration value="LIFFE-LONDON-SOFT"/>
+      <xs:enumeration value="LME"/>
+      <xs:enumeration value="LONDON-BULLION-MARKET"/>
+      <xs:enumeration value="LONDON-BULLION-MARKET-GOLD-A.M-ONLY"/>
+      <xs:enumeration value="LONDON-PLATINUM-PALLADIUM-MARKET"/>
+      <xs:enumeration value="NASDAQ-OMX"/>
+      <xs:enumeration value="NATURAL-GAS-WEEK"/>
+      <xs:enumeration value="NERC"/>
+      <xs:enumeration value="NGI"/>
+      <xs:enumeration value="NGX"/>
+      <xs:enumeration value="NUCLEAR-MARKET-REVIEW"/>
+      <xs:enumeration value="NYMEX-ELECTRICITY"/>
+      <xs:enumeration value="NYMEX-GAS"/>
+      <xs:enumeration value="NYMEX-NATURAL-GAS"/>
+      <xs:enumeration value="NYMEX-OIL"/>
+      <xs:enumeration value="OFFICIAL-BOARD-MARKETS"/>
+      <xs:enumeration value="OPIS-LP-GAS"/>
+      <xs:enumeration value="OPIS-PROPANE"/>
+      <xs:enumeration value="PAPER-PACKAGING-MONITOR"/>
+      <xs:enumeration value="PAPER-TRADER"/>
+      <xs:enumeration value="PERTAMINA"/>
+      <xs:enumeration value="PETROCHEMWIRE"/>
+      <xs:enumeration value="PIX-PULP-BENCHMARK-INDICES"/>
+      <xs:enumeration value="PLATTS-APAG-MARKETSCAN"/>
+      <xs:enumeration value="PLATTS-BUNKERWIRE"/>
+      <xs:enumeration value="PLATTS-CLEAN-TANKERWIRE"/>
+      <xs:enumeration value="PLATTS-CRUDE-OIL-MARKETWIRE"/>
+      <xs:enumeration value="PLATTS-DIRTY-TANKERWIRE"/>
+      <xs:enumeration value="PLATTS-EUROPEAN-GAS"/>
+      <xs:enumeration value="PLATTS-EUROPEAN-MARKETSCAN"/>
+      <xs:enumeration value="PLATTS-METALS-ALERT"/>
+      <xs:enumeration value="PLATTS-OILGRAM"/>
+      <xs:enumeration value="PLATTS-TSI-IRON-ORE"/>
+      <xs:enumeration value="PLATTS-TSI-SCRAP"/>
+      <xs:enumeration value="PLATTS-TSI-STEEL"/>
+      <xs:enumeration value="PLATTS-US-MARKETSCAN"/>
+      <xs:enumeration value="PULP-AND-PAPER-INTERNATIONAL"/>
+      <xs:enumeration value="PULP-AND-PAPER-WEEK"/>
+      <xs:enumeration value="RIM-PRODUCTS-INTELLIGENCE-DAILY"/>
+      <xs:enumeration value="SAFEX-SOFT"/>
+      <xs:enumeration value="SFE-SOFT"/>
+      <xs:enumeration value="SICOM"/>
+      <xs:enumeration value="SP-GSCI"/>
+      <xs:enumeration value="STATISTICHES-BUNDESAMT"/>
+      <xs:enumeration value="TOCOM-OIL"/>
+      <xs:enumeration value="TOCOM-PRECIOUS"/>
+      <xs:enumeration value="TOCOM-SOFT"/>
+      <xs:enumeration value="UX-WEEKLY"/>
+      <xs:enumeration value="WORLD-PULP-MONTHLY"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EnvironmentalProductTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EUAllowance"/>
+      <xs:enumeration value="EUCredit"/>
+      <xs:enumeration value="AlternativeAllowance"/>
+      <xs:enumeration value="NOXEmissionsProduct"/>
+      <xs:enumeration value="RegionalEmissionsProduct"/>
+      <xs:enumeration value="RGGIEmissionsProduct"/>
+      <xs:enumeration value="SO2EmissionsProduct"/>
+      <xs:enumeration value="StateEmissionProduct"/>
+      <xs:enumeration value="VoluntaryEmissionProduct"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PeriodEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="D"/>
+      <xs:enumeration value="W"/>
+      <xs:enumeration value="M"/>
+      <xs:enumeration value="Y"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DayTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Business"/>
+      <xs:enumeration value="Calendar"/>
+      <xs:enumeration value="CommodityBusiness"/>
+      <xs:enumeration value="CurrencyBusiness"/>
+      <xs:enumeration value="ExchangeBusiness"/>
+      <xs:enumeration value="ScheduledTradingDay"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BusinessDayConventionEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FOLLOWING"/>
+      <xs:enumeration value="FRN"/>
+      <xs:enumeration value="PRECEDING"/>
+      <xs:enumeration value="MODPRECEDING"/>
+      <xs:enumeration value="NEAREST"/>
+      <xs:enumeration value="NONE"/>
+      <xs:enumeration value="MODFOLLOWING"/>
+      <xs:enumeration value="NotApplicable"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="NonNegativeMoney">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="currency" type="xs:string"/>
+      <xs:element minOccurs="0" name="amount" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="RegulatoryStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Derivative"/>
+      <xs:enumeration value="Term"/>
+      <xs:enumeration value="Spot"/>
+      <xs:enumeration value="Repo"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BuyerSellerEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Payer"/>
+      <xs:enumeration value="Receiver"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RoundingDirectionEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Up"/>
+      <xs:enumeration value="Down"/>
+      <xs:enumeration value="Nearest"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BarrierTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Knockin"/>
+      <xs:enumeration value="Knockout"/>
+      <xs:enumeration value="ReverseKnockin"/>
+      <xs:enumeration value="ReverseKnockout"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ProductEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="fxSwap"/>
+      <xs:enumeration value="fxSingleLeg"/>
+      <xs:enumeration value="fxOption"/>
+      <xs:enumeration value="fxDigitalOption"/>
+      <xs:enumeration value="fra"/>
+      <xs:enumeration value="swap"/>
+      <xs:enumeration value="capFloor"/>
+      <xs:enumeration value="swaption"/>
+      <xs:enumeration value="repo"/>
+      <xs:enumeration value="bondSimpleTransaction"/>
+      <xs:enumeration value="bondForward"/>
+      <xs:enumeration value="bondOption"/>
+      <xs:enumeration value="basketBondOption"/>
+      <xs:enumeration value="equitySimpleTransaction"/>
+      <xs:enumeration value="equityForward"/>
+      <xs:enumeration value="equityOption"/>
+      <xs:enumeration value="commodityForward"/>
+      <xs:enumeration value="commodityOption"/>
+      <xs:enumeration value="commoditySwap"/>
+      <xs:enumeration value="commoditySwaption"/>
+      <xs:enumeration value="bondSwap"/>
+      <xs:enumeration value="equitySwapTransactionSupplement"/>
+      <xs:enumeration value="creditDefaultSwap"/>
+      <xs:enumeration value="creditDefaultSwaption"/>
+      <xs:enumeration value="generalProduct"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--~~~~~~~~~~~~~~~~~~-->
+  <!--Enums for commodityForward - Smirnov M.A. 10.06.14-->
+  <xs:simpleType name="DeliveryDatesEnum">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="CalculationPeriod"/>
+      <xs:enumeration value="FirstNearby"/>
+      <xs:enumeration value="SecondNearby"/>
+      <xs:enumeration value="ThirdNearby"/>
+      <xs:enumeration value="FourthNearby"/>
+      <xs:enumeration value="FifthNearby"/>
+      <xs:enumeration value="SixthNearby"/>
+      <xs:enumeration value="SeventhNearby"/>
+      <xs:enumeration value="EighthNearby"/>
+      <xs:enumeration value="NinthNearby"/>
+      <xs:enumeration value="TenthNearby"/>
+      <xs:enumeration value="EleventhNearby"/>
+      <xs:enumeration value="TwelfthNearby"/>
+      <xs:enumeration value="ThirteenthNearby"/>
+      <xs:enumeration value="FourteenthNearby"/>
+      <xs:enumeration value="Spot"/>
+      <xs:enumeration value="FirstNearbyWeek"/>
+      <xs:enumeration value="SecondNearbyWeek"/>
+      <xs:enumeration value="ThirdNearbyWeek"/>
+      <xs:enumeration value="FourthNearbyWeek"/>
+      <xs:enumeration value="FifthNearbyWeek"/>
+      <xs:enumeration value="SixthNearbyWeek"/>
+      <xs:enumeration value="SeventhNearbyWeek"/>
+      <xs:enumeration value="EighthNearbyWeek"/>
+      <xs:enumeration value="NinthNearbyWeek"/>
+      <xs:enumeration value="TenthNearbyWeek"/>
+      <xs:enumeration value="EleventhNearbyWeek"/>
+      <xs:enumeration value="TwelfthNearbyWeek"/>
+      <xs:enumeration value="ThirteenthNearbyWeek"/>
+      <xs:enumeration value="FourteenthNearbyWeek"/>
+      <xs:enumeration value="FifteenthNearbyWeek"/>
+      <xs:enumeration value="SixteenthNearbyWeek"/>
+      <xs:enumeration value="SeventeenthNearbyWeek"/>
+      <xs:enumeration value="EighteenthNearbyWeek"/>
+      <xs:enumeration value="NineteenthNearbyWeek"/>
+      <xs:enumeration value="TwentiethNearbyWeek"/>
+      <xs:enumeration value="TwentyFirstNearbyWeek"/>
+      <xs:enumeration value="TwentySecondNearbyWeek"/>
+      <xs:enumeration value="TwentyThirdNearbyWeek"/>
+      <xs:enumeration value="TwentyFourthearbyWeek"/>
+      <xs:enumeration value="TwentyFifthNearbyWeek"/>
+      <xs:enumeration value="TwentySixthNearbyWeek"/>
+      <xs:enumeration value="TwentySeventhNearbyWeek"/>
+      <xs:enumeration value="TwentyEighthNearbyWeek"/>
+      <xs:enumeration value="TwentyNinthNearbyWeek"/>
+      <xs:enumeration value="ThirtiethNearbyWeek"/>
+      <xs:enumeration value="ThirtyFirstNearbyWeek"/>
+      <xs:enumeration value="ThirtySecondNearbyWeek"/>
+      <xs:enumeration value="ThirtyThirdNearbyWeek"/>
+      <xs:enumeration value="ThirtyFourthNearbyWeek"/>
+      <xs:enumeration value="ThirtyFifthNearbyWeek"/>
+      <xs:enumeration value="ThirtySixthNearbyWeek"/>
+      <xs:enumeration value="ThirtySeventhNearbyWeek"/>
+      <xs:enumeration value="ThirtyEighthNearbyWeek"/>
+      <xs:enumeration value="ThirtyNinthNearbyWeek"/>
+      <xs:enumeration value="FortiethNearbyWeek"/>
+      <xs:enumeration value="FortyFirstNearbyWeek"/>
+      <xs:enumeration value="FortySecondNearbyWeek"/>
+      <xs:enumeration value="FortyThirdNearbyWeek"/>
+      <xs:enumeration value="FortyFourthNearbyWeek"/>
+      <xs:enumeration value="FortyFifthNearbyWeek"/>
+      <xs:enumeration value="FortySixthNearbyWeek"/>
+      <xs:enumeration value="FortySeventhNearbyWeek"/>
+      <xs:enumeration value="FortyEighthNearbyWeek"/>
+      <xs:enumeration value="FortyNinthNearbyWeek"/>
+      <xs:enumeration value="FiftiethNearbyWeek"/>
+      <xs:enumeration value="FiftyFirstNearbyWeek"/>
+      <xs:enumeration value="FiftySecondNearbyWeek"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CommodityDayTypeEnum">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Business"/>
+      <xs:enumeration value="Calendar"/>
+      <xs:enumeration value="CommodityBusiness"/>
+      <xs:enumeration value="CurrencyBusiness"/>
+      <xs:enumeration value="ExchangeBusiness"/>
+      <xs:enumeration value="ScheduledTradingDay"/>
+      <xs:enumeration value="GasFlow"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CalendarSourceEnum">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="ListedOption"/>
+      <xs:enumeration value="Future"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AveragingMethodEnum">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Unweighted"/>
+      <xs:enumeration value="Weighted"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BullionTypeEnum">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Gold"/>
+      <xs:enumeration value="Palladium"/>
+      <xs:enumeration value="Platinum"/>
+      <xs:enumeration value="Silver"/>
+      <xs:enumeration value="Rhodium"/>
+      <xs:enumeration value="RhodiumSponge"/>
+      <xs:enumeration value="Iridium"/>
+      <xs:enumeration value="Ruthenium"/>
+      <xs:enumeration value="Osmium"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="QuantityUnit">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Allowances"/>
+      <xs:enumeration value="Amount"/>
+      <xs:enumeration value="BasisPoints"/>
+      <xs:enumeration value="BasisPointValue"/>
+      <xs:enumeration value="BasisPointValuePerBasisPoint"/>
+      <xs:enumeration value="BBL"/>
+      <xs:enumeration value="BCF"/>
+      <xs:enumeration value="BSH"/>
+      <xs:enumeration value="BTU"/>
+      <xs:enumeration value="CDD"/>
+      <xs:enumeration value="CPD"/>
+      <xs:enumeration value="dag"/>
+      <xs:enumeration value="Day"/>
+      <xs:enumeration value="Discount"/>
+      <xs:enumeration value="dmtu"/>
+      <xs:enumeration value="DTH"/>
+      <xs:enumeration value="ExchangeRate"/>
+      <xs:enumeration value="FEU"/>
+      <xs:enumeration value="GAL"/>
+      <xs:enumeration value="GJ"/>
+      <xs:enumeration value="GW"/>
+      <xs:enumeration value="GWh"/>
+      <xs:enumeration value="HDD"/>
+      <xs:enumeration value="hL"/>
+      <xs:enumeration value="IndexUnits"/>
+      <xs:enumeration value="Ingot"/>
+      <xs:enumeration value="IRFuturesPrice"/>
+      <xs:enumeration value="KG"/>
+      <xs:enumeration value="kL"/>
+      <xs:enumeration value="KW"/>
+      <xs:enumeration value="KWh"/>
+      <xs:enumeration value="L"/>
+      <xs:enumeration value="LB"/>
+      <xs:enumeration value="LogNormalVolatility"/>
+      <xs:enumeration value="MB"/>
+      <xs:enumeration value="MBF"/>
+      <xs:enumeration value="MJ"/>
+      <xs:enumeration value="MMBF"/>
+      <xs:enumeration value="MMBTU"/>
+      <xs:enumeration value="msf"/>
+      <xs:enumeration value="MT"/>
+      <xs:enumeration value="MW"/>
+      <xs:enumeration value="MWh"/>
+      <xs:enumeration value="ozt"/>
+      <xs:enumeration value="ParValueDecimal"/>
+      <xs:enumeration value="ParValueFraction"/>
+      <xs:enumeration value="Percentage"/>
+      <xs:enumeration value="Price"/>
+      <xs:enumeration value="Rate"/>
+      <xs:enumeration value="Shares"/>
+      <xs:enumeration value="Spread"/>
+      <xs:enumeration value="st"/>
+      <xs:enumeration value="st"/>
+      <xs:enumeration value="t"/>
+      <xs:enumeration value="TEU"/>
+      <xs:enumeration value="Therm"/>
+      <xs:enumeration value="UpfrontPoints"/>
+      <xs:enumeration value="ValuePerDay"/>
+      <xs:enumeration value="ValuePerPercent"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MetalTitleEnum">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="TransfersWithRiskOfLoss"/>
+      <xs:enumeration value="DoesNotTransferWithRiskOfLoss"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TouchConditionEnum">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Touch"/>
+      <xs:enumeration value="Notouch"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PremiumTypeEnum">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="PrePaid"/>
+      <xs:enumeration value="PostPaid"/>
+      <xs:enumeration value="Variable"/>
+      <xs:enumeration value="Fixed"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--End enums for commodityForward - Smirnov M.A. 10.06.14-->
+  <xs:simpleType name="PeriodExtendedEnum">
+    <xs:union memberTypes="PeriodEnum">
+      <xs:simpleType>
+        <xs:restriction base="xsd:token">
+          <xs:enumeration value="T"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="OptionTypeEnum">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Put"/>
+      <xs:enumeration value="Call"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EquityOptionTypeEnum">
+    <xs:union memberTypes="OptionTypeEnum">
+      <xs:simpleType>
+        <xs:restriction base="xsd:token">
+          <xs:enumeration value="Forward"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="CalculationSettlementLevelEnum">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Cumulative"/>
+      <xs:enumeration value="Average"/>
+      <xs:enumeration value="Mximum"/>
+      <xs:enumeration value="Minimum"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,167 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fxop="http://www.cinimex.ru/rim/fxOptionService" xmlns:fxop1="http://www.cinimex.ru/rim/fxOption" xmlns:com="http://www.cinimex.ru/rim/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.cinimex.ru/rim/fxOption file:///C:/Users/vmatkovskiy/Documents/Study_Project/%d0%a3%d1%87%d0%b5%d0%b1%d0%bd%d1%8b%d0%b9%20%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82/fxOption/fxOption.xsd">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<fxop:CreateFxOptionElem>
+			<fxop:fxOptionElem>
+				<fxop1:header>
+					<com:repository/>
+					<!--Optional:-->
+					<com:send_now/>
+					<!--Optional:-->
+					<com:messageId/>
+					<!--Optional:-->
+					<com:sentBy/>
+					<!--Optional:-->
+					<com:creationTimestamp/>
+				</fxop1:header>
+				<!--3 or more repetitions:-->
+				<fxop1:partyTradeIdentifier>
+					<com:partyReference href=""/>
+					<com:tradeId/>
+					<!--Optional:-->
+					<com:linkId/>
+				</fxop1:partyTradeIdentifier>
+				<fxop1:partyTradeIdentifier>
+					<com:partyReference href=""/>
+					<com:tradeId/>
+					<!--Optional:-->
+					<com:linkId/>
+				</fxop1:partyTradeIdentifier>
+				<fxop1:partyTradeIdentifier>
+					<com:partyReference href=""/>
+					<com:tradeId/>
+					<!--Optional:-->
+					<com:linkId/>
+				</fxop1:partyTradeIdentifier>
+				<fxop1:ReportingRegimeName/>
+				<fxop1:trade>
+					<com:tradeDate/>
+					<!--Optional:-->
+					<com:clearedDate/>
+					<!--Optional:-->
+					<com:asOfDate/>
+					<!--Optional:-->
+					<com:agreementDate/>
+					<!--Optional:-->
+					<com:effectiveDate/>
+				</fxop1:trade>
+				<fxop1:fxOptionDeal>
+					<fxop1:productType/>
+					<fxop1:productId/>
+					<fxop1:buyerPartyReference href=""/>
+					<fxop1:sellerPartyReference href=""/>
+					<fxop1:soldAs/>
+					<!--You have a CHOICE of the next 2 items at this level-->
+					<!--Optional:-->
+					<fxop1:americanExerciseLatestValueDate/>
+					<fxop1:americanExerciseExpiryDate/>
+					<fxop1:americanExerciseUnadjustedDate/>
+					<fxop1:europeanExerciseValueDate/>
+					<fxop1:europeanExerciseExpiryDate/>
+					<fxop1:putCurrencyAmountCurrency/>
+					<fxop1:putCurrencyAmountAmount/>
+					<fxop1:callCurrencyAmountCurrency/>
+					<fxop1:callCurrencyAmountAmount/>
+					<fxop1:strikeRate/>
+					<fxop1:strikeStrikeQuoteBasis/>
+					<fxop1:payerPartyReference href=""/>
+					<fxop1:receiverPartyReference href=""/>
+					<fxop1:premiumCurrency/>
+					<fxop1:premiumAmount/>
+					<!--Optional:-->
+					<fxop1:features>
+						<!--You have a CHOICE of the next 2 items at this level-->
+						<fxop1:primaryRateSourceRateSource/>
+						<fxop1:asianStartDate/>
+						<fxop1:asianEndDate/>
+						<fxop1:asianPeriodMultiplier/>
+						<fxop1:asianPeriod/>
+						<fxop1:asianDate/>
+						<fxop1:asianAverageRateWeightingFactor/>
+						<fxop1:asianRate/>
+						<fxop1:asianRateObservationQuoteBasis/>
+						<fxop1:barrierBarrierType/>
+						<fxop1:barrierCurrency1/>
+						<fxop1:barrierCurrency2/>
+						<fxop1:barrierQuoteBasis/>
+						<fxop1:barrierTriggerRate/>
+						<fxop1:barrierRateSource/>
+						<fxop1:barrierObservationStartDate/>
+						<fxop1:barrierObservationEndDate/>
+					</fxop1:features>
+					<!--Optional:-->
+					<fxop1:FxCashSettlement>
+						<fxop1:cashSettlementSettlementCurrency/>
+						<!--1 or more repetitions:-->
+						<fxop1:fixing>
+							<fxop1:QuotedCurrencyPairCurrency1/>
+							<fxop1:QuotedCurrencyPairCurrency2/>
+							<fxop1:QuotedCurrencyPairQuoteBasis/>
+							<!--Optional:-->
+							<fxop1:FixingDate/>
+							<fxop1:PrimaryRateSourceRateSource/>
+						</fxop1:fixing>
+					</fxop1:FxCashSettlement>
+				</fxop1:fxOptionDeal>
+				<!--1 or more repetitions:-->
+				<fxop1:party id="">
+					<!--1 to 2 repetitions:-->
+					<com:partyId/>
+					<com:partyIdType/>
+					<!--Optional:-->
+					<com:partyName/>
+				</fxop1:party>
+				<fxop1:nsdSpecificTradeFields>
+					<com:reconciliationType/>
+					<com:clearSettlementType/>
+					<com:clearSettlementMethod/>
+					<!--Optional:-->
+					<com:regulatoryStatus/>
+					<!--Optional:-->
+					<com:clearingOrganizationCode/>
+					<!--Optional:-->
+					<com:clearingCentralCounterpartyCode/>
+					<!--Zero or more repetitions:-->
+					<com:classificationSpecificCode>
+						<com:classificationCodeSpecificCode/>
+						<com:classificationCodeCode/>
+					</com:classificationSpecificCode>
+				</fxop1:nsdSpecificTradeFields>
+				<!--Zero or more repetitions:-->
+				<fxop1:ProductLegSpecific>
+					<com:productLegSpecificLegIdReference/>
+					<!--1 or more repetitions:-->
+					<com:productLegSpecificCode>
+						<com:productLegSpecificCodeType/>
+						<com:productLegSpecificCode/>
+					</com:productLegSpecificCode>
+				</fxop1:ProductLegSpecific>
+				<!--Optional:-->
+				<fxop1:Collateral>
+					<!--Optional:-->
+					<com:collateralPayerPartyReference href=""/>
+					<!--Optional:-->
+					<com:collateralReceiverPartyReference href=""/>
+					<!--Optional:-->
+					<com:collateralPeriodMultiplier/>
+					<!--Optional:-->
+					<com:collateralPeriod/>
+					<!--Optional:-->
+					<com:collateralPriceSource/>
+					<!--Optional:-->
+					<com:collateralMarginType/>
+					<!--Zero or more repetitions:-->
+					<com:CollateralPaymentDetails>
+						<com:collateralDate/>
+						<!--Optional:-->
+						<com:collateralCurrency/>
+						<!--Zero or more repetitions:-->
+						<com:collateralAmount/>
+					</com:CollateralPaymentDetails>
+				</fxop1:Collateral>
+			</fxop:fxOptionElem>
+			<!--Optional:-->
+			<com:MIRLinkId/>
+		</fxop:CreateFxOptionElem>
+	</soapenv:Body>
+</soapenv:Envelope>

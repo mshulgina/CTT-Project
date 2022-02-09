@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://www.cinimex.ru/rim/fxOption" xmlns="http://www.cinimex.ru/rim/fxOption" xmlns:common="http://www.cinimex.ru/rim/common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://www.cinimex.ru/rim/common" schemaLocation="fxOption_1.xsd"/>
+  <!--Level 1-->
+  <xs:complexType name="fxOptionType">
+    <xs:sequence>
+      <xs:element name="header" type="common:HeaderType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="3" name="partyTradeIdentifier" type="common:PartyTradeIdentifierType"/>
+      <xs:element name="ReportingRegimeName" type="xs:string"/>
+      <xs:element name="trade" type="common:TradeType"/>
+      <xs:element name="fxOptionDeal" type="fxOptionDealType"/>
+      <xs:element maxOccurs="unbounded" name="party" type="common:PartyType"/>
+      <xs:element name="nsdSpecificTradeFields" type="common:NsdSpecificTradeFieldsType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ProductLegSpecific" type="common:ProductLegSpecificType"/>
+      <xs:element minOccurs="0" name="Collateral" type="common:CollateralType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--Level 2-->
+  <xs:complexType name="fxOptionDealType">
+    <xs:sequence>
+      <xs:element name="productType" type="xs:string"/>
+      <xs:element name="productId" type="xs:string"/>
+      <xs:element name="buyerPartyReference" type="common:IdRefType"/>
+      <xs:element name="sellerPartyReference" type="common:IdRefType"/>
+      <xs:element name="soldAs" type="SoldAsEnumType"/>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element minOccurs="0" name="americanExerciseLatestValueDate" type="xs:date"/>
+          <xs:element name="americanExerciseExpiryDate" type="xs:date"/>
+          <xs:element name="americanExerciseUnadjustedDate" type="xs:date"/>
+        </xs:sequence>
+        <xs:sequence>
+          <xs:element name="europeanExerciseValueDate" type="xs:date"/>
+          <xs:element name="europeanExerciseExpiryDate" type="xs:date"/>
+        </xs:sequence>
+      </xs:choice>
+      <xs:element name="putCurrencyAmountCurrency" type="xs:string"/>
+      <xs:element name="putCurrencyAmountAmount" type="xs:decimal"/>
+      <xs:element name="callCurrencyAmountCurrency" type="xs:string"/>
+      <xs:element name="callCurrencyAmountAmount" type="xs:decimal"/>
+      <xs:element name="strikeRate" type="common:PositiveDecimal"/>
+      <xs:element name="strikeStrikeQuoteBasis" type="rateObservationQuoteBasisEnumType"/>
+      <xs:element name="payerPartyReference" type="common:IdRefType"/>
+      <xs:element name="receiverPartyReference" type="common:IdRefType"/>
+      <xs:element name="premiumCurrency" type="xs:string"/>
+      <xs:element name="premiumAmount" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="features" type="featuresType"/>
+      <xs:element minOccurs="0" name="FxCashSettlement" type="FxCashSettlementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="featuresType">
+    <xs:sequence>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element name="primaryRateSourceRateSource" type="xs:string"/>
+          <xs:element name="asianStartDate" type="xs:date"/>
+          <xs:element name="asianEndDate" type="xs:date"/>
+          <xs:element name="asianPeriodMultiplier" type="xs:positiveInteger"/>
+          <xs:element name="asianPeriod" type="common:PeriodExtendedEnum"/>
+          <xs:element name="asianDate" type="xs:date"/>
+          <xs:element name="asianAverageRateWeightingFactor" type="xs:decimal"/>
+          <xs:element name="asianRate" type="xs:decimal"/>
+          <xs:element name="asianRateObservationQuoteBasis" type="rateObservationQuoteBasisEnumType"/>
+        </xs:sequence>
+        <xs:sequence>
+          <xs:element name="barrierBarrierType" type="common:BarrierTypeEnum"/>
+          <xs:element name="barrierCurrency1" type="xs:string"/>
+          <xs:element name="barrierCurrency2" type="xs:string"/>
+          <xs:element name="barrierQuoteBasis" type="common:QuoteBasisType"/>
+          <xs:element name="barrierTriggerRate" type="common:PositiveDecimal"/>
+          <xs:element name="barrierRateSource" type="xs:string"/>
+          <xs:element name="barrierObservationStartDate" type="xs:date"/>
+          <xs:element name="barrierObservationEndDate" type="xs:date"/>
+        </xs:sequence>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FxCashSettlementType">
+    <xs:sequence>
+      <xs:element name="cashSettlementSettlementCurrency" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" name="fixing" type="FxFixing"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FxFixing">
+    <xs:sequence>
+      <xs:element name="QuotedCurrencyPairCurrency1" type="xs:string"/>
+      <xs:element name="QuotedCurrencyPairCurrency2" type="xs:string"/>
+      <xs:element name="QuotedCurrencyPairQuoteBasis" type="common:QuoteBasisType"/>
+      <xs:element minOccurs="0" name="FixingDate" type="xs:date"/>
+      <xs:element name="PrimaryRateSourceRateSource" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SoldAsEnumType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Put"/>
+      <xs:enumeration value="Call"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="rateObservationQuoteBasisEnumType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PutCurrencyPerCallCurrency"/>
+      <xs:enumeration value="CallCurrencyPerPutCurrency"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

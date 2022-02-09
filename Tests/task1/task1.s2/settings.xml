@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="" name="Test2" xsi:noNamespaceSchemaLocation="http://ctt.cinimex.ru/testSettings.xsd">
+
+	<GetTemplate path="Templates/ex1_msg1_invalid.xml" variable="msginvReq" />
+	
+<RESTSendPost objName="restTask1" request="msginvReq" response="msginvResp" responseCode="respCode">
+	<requestHeaders> 
+		<header name="SOAPAction" value="&quot;create&quot;" />
+		<header name="Content-Type" value="xml; charset=UTF-8"/> 
+	</requestHeaders>
+</RESTSendPost>
+<Log>#msginvResp#</Log>
+
+
+<!--	<RunSOAPHttpRequest operationName="create" timeout="5000">-->
+<!--		<SoapHttpEndpoint objName="task1" />-->
+<!--		<request variable="msginvReq" />-->
+<!--		<response variable="msginvResp" />-->
+<!--		<httpHeaders>-->
+<!--			<httpHeader name="SOAPAction" value="&quot;create&quot;" />-->
+<!--		</httpHeaders>-->
+<!--	</RunSOAPHttpRequest>-->
+
+
+
+	<GetTemplate path="Templates/ex1_resp1_validation_error.xml"
+		variable="meserror" />
+	<AssertXmlEqual order="false">
+		<actual variable="msginvResp" />
+		<expected variable="meserror" />
+	</AssertXmlEqual>
+
+
+	<Log>#msginvResp#</Log>
+
+</Test>

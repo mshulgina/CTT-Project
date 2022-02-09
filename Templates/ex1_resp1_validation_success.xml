@@ -1,0 +1,10 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://www.cinimex.ru/rim/common">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:WsResponseElem>
+         <com:status>SUCCESS</com:status>
+         <!--Optional:-->
+         <com:message>Document is valid</com:message>
+      </com:WsResponseElem>
+   </soapenv:Body>
+</soapenv:Envelope>
